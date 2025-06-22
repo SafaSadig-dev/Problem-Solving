@@ -5,3 +5,11 @@
  group by make
  having count(*) > 12000
  order by count(*) DESC;
+
+ -- without having
+ select *	from (select M.Make , count(*) as NumberOfVehicle from VehicleDetails
+ as V inner join Makes as M on V.MakeID = M.MakeID
+ where year between 1950 and 2000
+ group by make) as R1
+ where NumberOfVehicle > 12000
+ order by NumberOfVehicle;
